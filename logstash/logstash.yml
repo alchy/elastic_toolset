@@ -1,0 +1,43 @@
+# ------------ Node identity ------------
+node.name: d0clcsec1-logstash
+
+# ------------ Data path ------------------
+path.data: /datastore/containers/logstash-1/lib
+
+# ------------ Pipeline Settings --------------
+pipeline.id: main
+pipeline.workers: 8
+pipeline.batch.size: 64
+pipeline.batch.delay: 64
+pipeline.ecs_compatibility: v1
+
+# ------------ Pipeline Configuration Settings --------------
+path.config: /etc/logstash/conf.d/*.conf
+config.reload.automatic: true
+config.reload.interval: 30s
+
+# ------------ Queuing Settings --------------
+queue.type: persisted
+path.queue: /datastore/containers/logstash-1/queue
+queue.checkpoint.writes: 1024
+queue.drain: true
+queue.page_capacity: 512mb
+queue.max_bytes: 1024gb
+
+# ------------ Dead-Letter Queue Settings --------------
+dead_letter_queue.enable: false
+
+# ------------ Metrics Settings --------------
+http.host: "127.0.0.1"
+http.port: 9600
+
+# ------------ Debugging Settings --------------
+log.level: info
+path.logs: /datastore/containers/logstash-1/log
+
+# ------------ X-Pack Monitoring --------------
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.hosts: ["https://clcsec.dc.vzp.cz:9200"]
+xpack.monitoring.elasticsearch.username: "elastic"
+xpack.monitoring.elasticsearch.password: "***"
+xpack.monitoring.elasticsearch.ssl.certificate_authority: "/etc/logstash/logstash-certs/ca.pem"
