@@ -3,7 +3,7 @@
 # --- Konfigurace skriptu ---
 # Nastavení debug režimu (zapne set -x a případně detailní curl trace)
 # Pro vypnutí debugu nastav DEBUG_MODE="false" nebo jen zakomentuj.
-DEBUG_MODE="false"
+DEBUG_MODE="true"
 
 # Cesta k souboru s proměnnými prostředí (credentials)
 ENV_FILE="/vzpelk/site/.env"
@@ -134,7 +134,7 @@ INDICES=$(jq -r \
     (.alias | type == \"string\") and
     (.is_write_index | type == \"string\") and
     (.is_write_index == \"true\") and
-    (.alias | startofswith(\".\") | not) and
+    (.alias | startswith(\".\") | not) and  # ZDE JE OPRAVA: startofswith -> startswith
     (.alias | test(\"${ROLLOVER_ALIAS_REGEX}\"))
   ) | .index" "${TEMP_JSON_DATA}")
 
