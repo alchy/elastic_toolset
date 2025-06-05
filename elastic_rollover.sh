@@ -3,7 +3,7 @@
 # --- Konfigurace skriptu ---
 # Nastavení debug režimu (zapne set -x a případně detailní curl trace)
 # Pro vypnutí debugu nastav DEBUG_MODE="false" nebo jen zakomentuj.
-DEBUG_MODE="true"
+DEBUG_MODE="false"
 
 # Cesta k souboru s proměnnými prostředí (credentials)
 ENV_FILE="/vzpelk/site/.env"
@@ -24,7 +24,7 @@ DEBUG_LOG_FILE="/var/log/elastic_rollover_debug.log"
 CURL_TRACE_FILE="/tmp/curl_trace_rollover_$(date +%Y%m%d%H%M%S).log"
 
 # Regex pro filtrování aliasů, které chceme rolovat
-ROLLOVER_ALIAS_REGEX="syslog-(apm|afm|unix|net|gtm|ips)"
+ROLLOVER_ALIAS_REGEX="syslog-(proxy|apm|afm|unix|net|gtm|ips)|auditbeat|winlogbeat"
 
 # --- Inicializace a nastavení ---
 
